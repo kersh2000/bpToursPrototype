@@ -1,5 +1,6 @@
 import { Link } from "expo-router";
 import { Text, View, StyleSheet, Image } from "react-native";
+import { auth } from "./firebaseConfig";
 
 // React component
 const Index = () => {
@@ -7,12 +8,22 @@ const Index = () => {
         <View
             style={styles.container}
         >
-            <Link 
-                style={styles.account} 
-                href="/auth"
-            >
-                Account{"\n"}Login
-            </Link>
+            {
+                auth?.currentUser?.uid ? 
+                <Link 
+                    style={styles.account} 
+                    href="/account"
+                >
+                    Account{"\n"}Info
+                </Link>
+                :
+                <Link 
+                    style={styles.account} 
+                    href="/auth"
+                >
+                    Account{"\n"}Login
+                </Link>
+            }
             <Image 
                 source={require('./img/bp-tours-logo.png')}
                 style={styles.companyImage}

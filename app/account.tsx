@@ -1,12 +1,31 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
+import { auth } from "./firebaseConfig";
+import { signOut } from "firebase/auth";
+import { router } from "expo-router";
 
 // React component
 const Account = () => {
+
+    // Logout function
+    const logout = async () => {
+        console.log("Logout");
+        try {
+            await signOut(auth);
+            // Route to the auth page
+            router.replace('/auth');
+        } catch (err) {
+            console.error(err);
+        }
+    }
+    
     return(
         <View 
             style={styles.container}
         >
-            <Text>This is the Account Page! Edit app/account.tsx.</Text>
+            <Button 
+                title="Logout"
+                onPress={logout}
+            />
         </View>
     )
 }
@@ -14,9 +33,11 @@ const Account = () => {
 // React component styling
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: "flex-start",
-        alignItems: "center"
+        justifyContent: "center",
+        alignSelf: "center",
+        alignItems: "center",
+        width: '90%',
+        borderWidth: 1
     }
 })
 
