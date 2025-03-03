@@ -12,7 +12,8 @@ const Account = () => {
         try {
             await signOut(auth);
             // Route to the auth page
-            router.replace('/auth');
+            router.dismissAll();
+            router.replace('/');
         } catch (err) {
             console.error(err);
         }
