@@ -129,8 +129,11 @@ const Account = () => {
             style={styles.container}
         >
             <Text>
+                User: {auth?.currentUser?.email}
+            </Text>
+            <Text>
                 Current Tour Points: {points}
-                </Text>
+            </Text>
             <View 
                 style={styles.container}
             >

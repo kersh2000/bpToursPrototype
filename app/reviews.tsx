@@ -79,6 +79,9 @@ const Reviews = () => {
                 >
                     Give us a review!
                 </Text>
+                <Text>
+                    Log in to post a review.
+                </Text>
                 <StarRating 
                     rating={stars}
                     onChange={setStars}

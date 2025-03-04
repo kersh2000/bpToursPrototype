@@ -1,9 +1,10 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState } from "react";
 import { View, StyleSheet, Alert, TextInput, Button } from "react-native";
-import { auth } from "./firebaseConfig";
+import { auth, db } from "./firebaseConfig";
 import { router } from "expo-router";
 import { FirebaseError } from "firebase/app";
+import { addDoc, collection } from "firebase/firestore";
 
 // React component
 const Auth = () => {
@@ -32,6 +33,12 @@ const Auth = () => {
         console.log("Register Button!");
         try {
             await createUserWithEmailAndPassword(auth, email, password);
+            // Add points by creating a profile entry
+            const profilesRef = collection(db, "profiles");
+            await addDoc(profilesRef, {
+                userID: auth?.currentUser?.uid,
+                points: 60
+            });
             // Route to Home
             router.dismissAll();
             router.replace('/');
